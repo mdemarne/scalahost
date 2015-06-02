@@ -336,7 +336,7 @@ object MergeTrees {
         // Ex.
         // p: Type.Apply(Type.Select(Term.Name("scala"), Type.Name("Tuple2")), List(Type.Name("Date"), Type.Name("Date")))
         // c: Type.Tuple(List(Type.Name("Date"), Type.Name("Date")))
-        case (p: Type.Apply, Type.Tuple(celems)) =>
+        case (p: Type.Apply, Type.Tuple(celems)) if celems.length > 1 && p.args.length > 1 =>
           Type.Tuple(zLoop(loop[Type])(p.args, celems), tokens = p.tokens)
 
         // Convering name expantion equivalent as for Ctor
